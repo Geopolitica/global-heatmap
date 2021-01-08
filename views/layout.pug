@@ -1,0 +1,51 @@
+doctype html
+html
+    head
+        title= title
+        link(rel='stylesheet', href='https://unpkg.com/leaflet@1.2.0/dist/leaflet.css')
+        link(rel='stylesheet', href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css')
+        link(rel='stylesheet', href='/stylesheets/style.css')
+        link(link rel="preconnect" href="https://fonts.gstatic.com")
+        link(href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet")
+        link(href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet")
+        script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+        script(src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js')
+        script(src='https://unpkg.com/leaflet@1.2.0/dist/leaflet.js')
+        script(src='http://unpkg.com/leaflet@1.3.1/dist/leaflet.js')
+        script(type='text/javascript').
+            let timerStart =  Date.now()
+    body
+        
+        block content 
+        //- p Updating in 15 mins... 
+        p(id='timer') 
+        script(type='text/javascript').
+            setTimeout(function(){
+            window.location.reload(1);
+            }, 900000);
+
+        script(type='text/javascript').
+     
+            // Update the count down every 1 second
+            let x = setInterval(function() {
+
+            let countDownDate = new Date("Jan 5, 2021 15:37:25").getTime();
+            let now = new Date().getTime();
+            let fifteenMinutesTime = new Date(now + (1000 * 60 * 15))// 100 ms * 60 seconds * 15 mins
+            let convertedTimerStart = new Date(timerStart + (1000 * 60 * 15))
+            let distance = convertedTimerStart - now;
+
+            let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            let seconds = Math.floor(( (distance % (1000 * 60 )) / 1000 ))
+        
+            document.getElementById("timer").innerHTML = `Updating in ${minutes} ${ minutes >1 ? 'minutes' : 'minute'} and ${seconds} seconds`
+
+            // If the count down is finished, write some text
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("timer").innerHTML = "Refreshing...";
+            }
+
+            /// Put the code back here when its time to set it back to inervals
+            }, 1000);
+        
