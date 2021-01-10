@@ -63,7 +63,7 @@ input:focus {
   margin-left: 5px;
 }
 .spinner:after {
-  content: '';
+  content: "";
   display: block;
   width: 28px;
   height: 28px;
@@ -931,7 +931,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 .leaflet-oldie .leaflet-popup-tip {
   width: 24px;
   margin: 0 auto;
-  -ms-filter: 'progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678)';
+  -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678)";
   filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678,M12=0.70710678,M21=-0.70710678,M22=0.70710678);
 }
 .leaflet-oldie .leaflet-popup-tip-container {
@@ -974,7 +974,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
   pointer-events: none;
   border: 6px solid transparent;
   background: transparent;
-  content: '';
+  content: "";
 }
 .leaflet-tooltip-bottom {
   margin-top: 6px;

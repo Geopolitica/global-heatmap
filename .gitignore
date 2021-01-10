@@ -1,3 +1,4 @@
 public/test.css
 .DS_Store
 /node_modules
+.env
