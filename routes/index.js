@@ -39,7 +39,11 @@ let Mention = mongoose.model("Mentions", MentionSchema, "tweets");
 
 const now = moment().format();
 const last24Hours = moment(now).add(-24, "hours").format();
-// console.log(last24Hours);
+console.log(last24Hours);
+
+var start = new Date("11 Jan 2021").getTime() / 1000; // ISODate("2021-01-10T16:40:54-05:00").getTime() / 1000;
+// var end = ISODate("2018-02-28T23:59:59.000Z").getTime() / 1000;
+// console.log(start);
 
 /* GET mentions from bbc/tweets. */
 router.get("/mentions", function (req, res) {
@@ -47,7 +51,7 @@ router.get("/mentions", function (req, res) {
     {
       $match: {
         country_mentions: { $exists: true, $ne: null },
-        created_at: { $gte: last24Hours },
+        created_at: { $gte: Date(last24Hours) },
       },
     },
     {
