@@ -26,9 +26,7 @@ block content
             fetch('/mentions')
             .then(response => response.json())
             .then(function(data){
-                //- console.log(data[0])
                 for(i=0;i<data.length;i++){
-                    //- console.log(data[i])
                     mentions_array.push(data[i])
                 }
             })
@@ -100,9 +98,9 @@ block content
             if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
                 layer.bringToFront();
             }
-            //- console.log(layer)
+
             info.update(layer.feature.properties);
-            //- console.log(layer)
+
         }
 
         function resetHighlight(e) {
@@ -123,7 +121,6 @@ block content
         }
 
         var info = L.control();
-        //console.log(info)
 
         info.onAdd = function (map) {
             this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
