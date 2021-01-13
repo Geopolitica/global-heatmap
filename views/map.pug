@@ -35,17 +35,17 @@ block content
         getMapLayers()
 
         function getColor(d) {
-            return d > 7
+            return d > 5
                 ? '#e79200' // '#800026'
-                : d > 6
+                : d === 5
                 ? '#e79200'
-                : d > 5
+                : d === 4
                 ? '#ffa917'
-                : d > 4
+                : d === 4
                 ? '#feba45'
-                : d > 3
+                : d === 3
                 ? '#ffcb73'
-                : d > 2
+                : d === 2
                 ? '#ffdca2'
                 : d === 1
                 ? '#ffedd0'

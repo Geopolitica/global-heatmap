@@ -74,7 +74,7 @@ router.get("/", function (req, res) {
   }).limit(10);
 });
 
-/* GET tweets mentioning a specific country */
+/* GET tweets mentioning a specific country - built for objects */
 router.get("/mentions/:name", function (req, res) {
   if (req.params.name) {
     Mention.find(
@@ -84,6 +84,28 @@ router.get("/mentions/:name", function (req, res) {
       }
     );
   }
+});
+
+// Get tweets mentioning a certain topic
+router.get("/topic/:name", function (req, res) {
+  // const query = Mention.find(); //.exec()
+  const topic = req.params.name.toLowerCase();
+  const query = Mention.find({ topics: { $all: [topic] } });
+  // console.log(typeof req.params.name);
+  query.exec(function (err, docs) {
+    if (err) return next(err);
+    res.send(docs);
+  });
+});
+
+/* GET tweets mentioning a specific country - built for arrays */
+router.get("/country/:name", function (req, res) {
+  const query = Mention.find({ country_mentions: { $all: [req.params.name] } });
+
+  query.exec(function (err, docs) {
+    if (err) return next(err);
+    res.send(docs);
+  });
 });
 
 /* GET json data. */
