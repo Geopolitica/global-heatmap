@@ -1,7 +1,7 @@
-let express = require("express");
-let router = express.Router();
-let mongoose = require("mongoose");
-let moment = require("moment");
+const express = require("express");
+const router = express.Router();
+const mongoose = require("mongoose");
+const moment = require("moment");
 
 require("dotenv").config();
 
@@ -41,17 +41,14 @@ const now = moment().format();
 const last24Hours = moment(now).add(-24, "hours").format();
 console.log(last24Hours);
 
-var start = new Date("11 Jan 2021").getTime() / 1000; // ISODate("2021-01-10T16:40:54-05:00").getTime() / 1000;
-// var end = ISODate("2018-02-28T23:59:59.000Z").getTime() / 1000;
-// console.log(start);
-
 /* GET mentions from bbc/tweets. */
 router.get("/mentions", function (req, res) {
+  // const query = Mention.find(); //.exec()
   const query = Mention.aggregate([
     {
       $match: {
-        country_mentions: { $exists: true, $ne: null },
-        created_at: { $gte: Date(last24Hours) },
+        country_mentions: { $type: "object", $ne: null },
+        created_at: { $gte: new Date(last24Hours) },
       },
     },
     {
@@ -61,9 +58,10 @@ router.get("/mentions", function (req, res) {
       },
     },
   ]);
-  query.exec(function (err, someValue) {
+
+  query.exec(function (err, docs) {
     if (err) return next(err);
-    res.send(someValue);
+    res.send(docs);
   });
 });
 
