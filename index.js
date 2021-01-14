@@ -47,14 +47,31 @@ router.get("/mentions", function (req, res) {
   const query = Mention.aggregate([
     {
       $match: {
-        country_mentions: { $type: "object", $ne: null },
-        created_at: { $gte: new Date(last24Hours) },
+        country_mentions: {
+          $ne: null,
+          $type: "array",
+          $not: {
+            $size: 0,
+          },
+        },
+      },
+    },
+    {
+      $unwind: {
+        path: "$country_mentions",
       },
     },
     {
       $group: {
-        _id: "$country_mentions.countryName",
-        count: { $sum: 1 },
+        _id: "$country_mentions",
+        sum: {
+          $sum: 1,
+        },
+      },
+    },
+    {
+      $sort: {
+        sum: -1,
       },
     },
   ]);
@@ -64,6 +81,29 @@ router.get("/mentions", function (req, res) {
     res.send(docs);
   });
 });
+// /* GET mentions from bbc/tweets. */
+// router.get("/mentions", function (req, res) {
+//   // const query = Mention.find(); //.exec()
+//   const query = Mention.aggregate([
+//     {
+//       $match: {
+//         country_mentions: { $type: "object", $ne: null },
+//         created_at: { $gte: new Date(last24Hours) },
+//       },
+//     },
+//     {
+//       $group: {
+//         _id: "$country_mentions.countryName",
+//         count: { $sum: 1 },
+//       },
+//     },
+//   ]);
+
+//   query.exec(function (err, docs) {
+//     if (err) return next(err);
+//     res.send(docs);
+//   });
+// });
 
 /* GET Map page. */
 router.get("/", function (req, res) {

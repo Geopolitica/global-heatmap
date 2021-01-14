@@ -14,8 +14,10 @@ block content
         // TODO: Convert from Jquery & narrow to only mentions array
         function getMapLayers() {
             $.getJSON('/maplayers',function(result){
-                $.each(result, function(i, mlayer){        
-                    $.getJSON('/mapjson/' + mlayer.properties.name, function(data) { addLayer(data, mlayer.properties.name ) });
+                $.each(result, function(i, mlayer){       
+                    $.getJSON('/mapjson/' + mlayer.properties.name, function(data) { 
+                        addLayer(data, mlayer.properties.name ) 
+                        });
                 });
             });
         }
@@ -35,7 +37,7 @@ block content
         getMapLayers()
 
         function getColor(d) {
-            return d > 5
+            return d > 6
                 ? '#e79200' // '#800026'
                 : d === 5
                 ? '#e79200'
@@ -56,7 +58,7 @@ block content
             let count;
             for (let i = 0; i < mentions_array.length; i++) {
                 if (mentions_array[i]._id === country) {
-                count = mentions_array[i].count
+                count = mentions_array[i].sum
                 break;
                 }
             }
