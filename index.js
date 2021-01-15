@@ -54,6 +54,7 @@ router.get("/mentions", function (req, res) {
             $size: 0,
           },
         },
+        created_at: { $gte: new Date(last24Hours) },
       },
     },
     {
@@ -81,29 +82,6 @@ router.get("/mentions", function (req, res) {
     res.send(docs);
   });
 });
-// /* GET mentions from bbc/tweets. */
-// router.get("/mentions", function (req, res) {
-//   // const query = Mention.find(); //.exec()
-//   const query = Mention.aggregate([
-//     {
-//       $match: {
-//         country_mentions: { $type: "object", $ne: null },
-//         created_at: { $gte: new Date(last24Hours) },
-//       },
-//     },
-//     {
-//       $group: {
-//         _id: "$country_mentions.countryName",
-//         count: { $sum: 1 },
-//       },
-//     },
-//   ]);
-
-//   query.exec(function (err, docs) {
-//     if (err) return next(err);
-//     res.send(docs);
-//   });
-// });
 
 /* GET Map page. */
 router.get("/", function (req, res) {
@@ -127,9 +105,8 @@ router.get("/mentions/:name", function (req, res) {
 });
 
 // Get tweets mentioning a certain topic
-router.get("/topic/:name", function (req, res) {
-  // const query = Mention.find(); //.exec()
-  const topic = req.params.name.toLowerCase();
+router.get("/topics/:country", function (req, res) {
+  const topic = req.params.country; // .toLowerCase();
   const query = Mention.find({ topics: { $all: [topic] } });
   // console.log(typeof req.params.name);
   query.exec(function (err, docs) {
