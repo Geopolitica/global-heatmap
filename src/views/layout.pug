@@ -25,8 +25,7 @@ html
             }, 900000);
 
         script(type='text/javascript').
-     
-            // Update the count down every 1 second
+    
             let x = setInterval(function() {
 
             let countDownDate = new Date("Jan 5, 2021 15:37:25").getTime();
@@ -40,12 +39,9 @@ html
         
             document.getElementById("timer").innerHTML = `Updating in ${minutes} ${ minutes >1 ? 'minutes' : 'minute'} and ${seconds} seconds`
 
-            // If the count down is finished, write some text
             if (distance < 0) {
                 clearInterval(x);
                 document.getElementById("timer").innerHTML = "Refreshing...";
             }
-
-            /// Put the code back here when its time to set it back to inervals
             }, 1000);
         

@@ -1,21 +1,21 @@
-var Tweet = require("../models/tweet");
+const Event = require("../models/event");
 const moment = require("moment");
 
 // Display list of all Authors.
-exports.tweet_list = function (req, res, next) {
-  Tweet.find()
+exports.event_list = function (req, res, next) {
+  Event.find()
     .limit(10)
     // .sort([["family_name", "ascending"]])
-    .exec(function (err, list_tweets) {
+    .exec(function (err, list_events) {
       if (err) {
         return next(err);
       }
-      res.json(list_tweets);
+      res.json(list_events);
     });
 };
 
 exports.agg_list = function (req, res, next) {
-  Tweet.aggregate([
+  Event.aggregate([
     {
       $match: {
         country_mentions: {
@@ -59,7 +59,7 @@ exports.agg_list = function (req, res, next) {
 exports.mentions = function (req, res, next) {
   const now = moment().format();
   const last24Hours = moment(now).add(-24, "hours").format();
-  Tweet.aggregate([
+  Event.aggregate([
     {
       $match: {
         country_mentions: {
@@ -96,8 +96,8 @@ exports.mentions = function (req, res, next) {
   });
 };
 
-exports.getTweetsByCountry = function (req, res) {
-  Tweet.find({ country_mentions: { $all: [req.params.name] } }).exec(function (
+exports.getEventsByCountry = function (req, res) {
+  Event.find({ country_mentions: { $all: [req.params.name] } }).exec(function (
     err,
     docs
   ) {

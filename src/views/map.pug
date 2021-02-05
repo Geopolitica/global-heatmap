@@ -10,7 +10,6 @@ block content
             attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
         });
 
-
         // TODO: Convert from Jquery & narrow to only mentions array
         function getMapLayers() {
             $.getJSON('/maplayers',function(result){
@@ -122,7 +121,7 @@ block content
             });
         }
 
-        var info = L.control();
+        const info = L.control();
 
         info.onAdd = function (map) {
             this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
@@ -140,16 +139,16 @@ block content
 
         info.addTo(map);
 
-        var legend = L.control({position: 'bottomleft'});
+        const legend = L.control({position: 'bottomleft'});
 
         legend.onAdd = function (map) {
 
-            var div = L.DomUtil.create('div', 'info legend'),
+            const div = L.DomUtil.create('div', 'info legend'),
                 grades = [1, 2, 3, 4, 5, 6, 7].reverse();
                 labels = [];
 
             // loop through our density intervals and generate a label with a colored square for each interval
-            for (var i = 0; i < grades.length; i++) {
+            for (let i = 0; i < grades.length; i++) {
                 div.innerHTML +=
                     `<i style="background:${getColor(grades[i])}"></i>${grades[i]}<br>`
             }
