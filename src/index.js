@@ -7,12 +7,10 @@ const router = express.Router();
 const event_controller = require("./controllers/eventController");
 const map_controller = require("./controllers/mapController");
 
-require("dotenv").config({ debug: process.env.DEBUG }); //({ path: "../.env" }); //__dirname + " });
+require("dotenv").config({ debug: process.env.DEBUG });
 
 // // Mongoose connection to MongoDB
-// const DB = process.env.DATABASE;
-const DB =
-  "mongodb+srv://britt:cZPQe7Hh2Ca8DACv@cluster0.zywmu.mongodb.net/bbc?retryWrites=true&w=majority";
+const DB = process.env.DATABASE;
 
 mongoose
   .connect(DB, {
